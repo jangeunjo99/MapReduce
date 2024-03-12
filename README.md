@@ -1,6 +1,8 @@
 # 대용량 정형 데이터에 대한 MapReduce 기반 분삭 가명 처리 시스템 
 
-
+<br/>
+<br/>
+<br/>
 
 ## 프로젝트 개요
 
@@ -48,8 +50,12 @@
   - 불필요한 Reduce 단계를 생략한 Map-Only 작업
   - **Map()** : 레코드 별로 한 줄씩 읽어 가명 처리에 해당하는 열일 경우 연산 수행
   - Map 함수의 결과값은 최종적으로 가명 처리가 완료된 데이터로 HDFS에 저장
+ 
+<br/>
+<br/>
+<br/>
 
- ## 실험 환경  
+## 실험 환경  
  
 <table>
   <tr>
@@ -91,8 +97,11 @@
 - 2000GB 기준 약 60억 행으로 구성  
 <img src="Data.png" title="데이터 일부"></img><br/>
 
+<br/>
+<br/>
+
 ## 가명 처리 시스템 사용자 입력 파일
-<img src="Json_format.png" title="데이터 일부"></img><br/>  
+<img src="Json_format.png" title="사용자 입력 파일 형태"></img><br/>  
 - 사용자가 입력한 Json 파일을 통해 가명 처리 시스템 수행
 - {Key:Value = 가명 처리 수행할 컬럼명 : ["수행 기능", "옵션"]} 형식으로 입력
 
@@ -110,7 +119,7 @@
 |mapreduce.reduce.memory.mb|MapReduce 작업의 Reduce 태스크가 사용할 수 있는 메모리 양|{2GB, 4GB, 8GB, 16GB}|
 |mapreduce.map.memory.mb|MapReduce 작업의 Map 태스크가 사용할 수 있는 메모리 양|{2GB, 4GB, 8GB, 16GB}|
 |mapred.compress.map.output|Map 단계 출력의 압축 여부|{True}|
-|mapred.output.compression.type|출력 데이터의 압축 유형 결정|{BLOCL}|
+|mapred.output.compression.type|출력 데이터의 압축 유형 결정|{BLOCK}|
 |mapred.map.output.compression.codec|맵 작업의 출력 데이터에 사용할 압축 코덱|{Snappy}|
 
 
