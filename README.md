@@ -1,4 +1,4 @@
-# 대용량 정형 데이터에 대한 MapReduce 기반 분삭 가명 처리 시스템 
+# 대용량 정형 데이터에 대한 MapReduce 기반 분산 가명 처리 시스템 
 
 <br/>
 <br/>
@@ -26,8 +26,8 @@
 
 # 0. 프로젝트 성과 
 1. <code style="color : red">2TB 개인 정보 가상 데이터 8가지 기능 1시간 수행 성공 (**과제 목표 달성**)</code> 
-2. <code style="color : red">[S/W 저작권 등록] 대용량 파일에 대한 MapReduce 기반 분산 가명처리 시스템</code>
-3. <code style="color : red">[KSC2023] 대규모 정형 데이터를 위한 맵리듀스 기반 고속 가명 처리 시스템 개발</code>
+2. <code style="color : red">**[S/W 저작권 등록]** 대용량 파일에 대한 MapReduce 기반 분산 가명처리 시스템</code>
+3. <code style="color : red">**[KSC2023]** 대규모 정형 데이터를 위한 맵리듀스 기반 고속 가명 처리 시스템 개발</code>
 
 <br/>
 <br/>
@@ -37,6 +37,7 @@
 0. 나의 기여도 : **100%**
 1. 클러스터 환경 구축
    - 16개 노드로 이루어진 Hadoop 클러스터를 직접 구축
+   - 하둡 클러스터 설치 과정.pdf 참고  
 2. MapReduce 프로그램 최적화
    - Map-Only 작업 구성 : 가명 연산 최적화를 위해 불필요한 Reducer 함수를 제거하고, Map-Only 작업으로 구성함으로써 네트워크 트래픽과 디스크 I/O를 줄이는 데 도움을 줌.
    - Combiner 사용 : Map 함수의 출력 결과를 로컬에서 미리 집계(Aggregation)하여 Reducer로 전송함으로써, Reducer로의 데이터 전송량 감소 및 전체 MapReduce 작업 속도 향상시킴
