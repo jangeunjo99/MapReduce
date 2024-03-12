@@ -91,3 +91,26 @@
 - 2000GB 기준 약 60억 행으로 구성  
 <img src="Data.png" title="데이터 일부"></img><br/>
 
+## 가명 처리 시스템 사용자 입력 파일
+<img src="Json_format.png" title="데이터 일부"></img><br/>  
+- 사용자가 입력한 Json 파일을 통해 가명 처리 시스템 수행
+- {Key:Value = 가명 처리 수행할 컬럼명 : ["수행 기능", "옵션"]} 형식으로 입력
+
+## 성능 최적화 파라미터  
+- 하둡은 파라미터에 따라 수행 시간과 속도가 크게 영향 받음
+- 최적의 파라미터는 그리드 서치 (Grid Search)방식으로 모니터링과 실험을 거쳐 최적화된 값 확인
+  
+|매개변수|설명|서치 범위|
+|:---:|:---:|:---:|
+|dfs.block.size|HDFS에서 파일을 블록으로 나눌 때 각 블록의 크기|{128MB, 256MB, 512MB}|
+|mapreduce.job.maps|Map 단계에서 실행할 맵 태스크 개수|{10, 30, 50, 100, 200}|
+|mapreduce.job.reduces|Reduce 단계에서 실행할 리듀스 태스크 개수|{10, 30, 50, 100, 200}|
+|mapreduce.input.fileinputformat.split.minsize|하나의 입력 파일이 분할 가능한 최소 크기|{128MB, 256MB, 512MB}|
+|mapreduce.input.fileinputformat.split.maxsize|하나의 입력 파일이 분할 가능한 최대 크기|{128MB, 256MB, 512MB}|
+|mapreduce.reduce.memory.mb|MapReduce 작업의 Reduce 태스크가 사용할 수 있는 메모리 양|{2GB, 4GB, 8GB, 16GB}|
+|mapreduce.map.memory.mb|MapReduce 작업의 Map 태스크가 사용할 수 있는 메모리 양|{2GB, 4GB, 8GB, 16GB}|
+|mapred.compress.map.output|Map 단계 출력의 압축 여부|{True}|
+|mapred.output.compression.type|출력 데이터의 압축 유형 결정|{BLOCL}|
+|mapred.map.output.compression.codec|맵 작업의 출력 데이터에 사용할 압축 코덱|{Snappy}|
+
+
