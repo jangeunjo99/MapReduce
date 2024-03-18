@@ -38,11 +38,14 @@
 1. 클러스터 환경 구축
    - 16개 노드로 이루어진 Hadoop 클러스터를 직접 구축
    - https://joyous-shell-10e.notion.site/d81af1f1be5f4f5ca969f97b1fff8063?pvs=4 
-2. MapReduce 프로그램 최적화
-   - Map-Only 작업 구성 : 가명 연산 최적화를 위해 불필요한 Reducer 함수를 제거하고, Map-Only 작업으로 구성함으로써 네트워크 트래픽과 디스크 I/O를 줄이는 데 도움을 줌.
-   - Combiner 사용 : Map 함수의 출력 결과를 로컬에서 미리 집계(Aggregation)하여 Reducer로 전송함으로써, Reducer로의 데이터 전송량 감소 및 전체 MapReduce 작업 속도 향상시킴
-3. 대표적 가명처리 기능 최적화
-   - 총 8개의 대표적 가명처리 기능에 대한 포팅 및 최적화 진행  
+2. MapReduce 프로그램 코드 최적화
+   - 코드 리팩토링 : 코드 line by line 계산 비용 확인 후 리팩토링
+     - (문제1) 리듀서 함수 내에서 데이터의 모든 컬럼(N개)와 입력된 가명 처리 기능(M개)의 수 만큼 반복되는 비효율적인 이중 for-loop구조 발견  
+       ▶ (해결1) 가명 처리 필요한 컬럼 위치 사전에 식별 및 저장하여 단일 반복 구조로 개선 **계산 복잡도 O(N*M)에서 O(M) 단축**  
+     - (문제2) 맵과 리듀서 사이의 데이터 전송 병목 현상 발생  
+       ▶ (해결2) 컴바이너(Combiner)를 통해 합계, 최소값, 최대값 등의 통계값을 로컬에서 미리 집계(Aggregation)하여 리듀서로의 데이터 전송량 감소    
+3. MapReduce 프로그램 파라미터 최적화  
+   - 하둡 공식 문서 <a href ="https://hadoop.apache.org/docs/r3.0.0/hadoop-mapreduce-client/hadoop-mapreduce-client-core/mapred-default.xml">(링크)</a> 와 관련 서적 탐구하며 다양한 설정값에 대한 실험 진행 
 
 <br/>
 <br/>
