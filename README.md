@@ -37,7 +37,7 @@
 0. 나의 기여도 : **100%**
 1. 클러스터 환경 구축
    - 16개 노드로 이루어진 Hadoop 클러스터를 직접 구축
-   - 하둡 클러스터 설치 과정.pdf 참고  
+   - https://joyous-shell-10e.notion.site/d81af1f1be5f4f5ca969f97b1fff8063?pvs=4 
 2. MapReduce 프로그램 최적화
    - Map-Only 작업 구성 : 가명 연산 최적화를 위해 불필요한 Reducer 함수를 제거하고, Map-Only 작업으로 구성함으로써 네트워크 트래픽과 디스크 I/O를 줄이는 데 도움을 줌.
    - Combiner 사용 : Map 함수의 출력 결과를 로컬에서 미리 집계(Aggregation)하여 Reducer로 전송함으로써, Reducer로의 데이터 전송량 감소 및 전체 MapReduce 작업 속도 향상시킴
