@@ -88,7 +88,7 @@
 
 
 ## 3.1  사용자 입력 파일
-<img src="Json_format.png" title="사용자 입력 파일 형태"></img><br/>  
+<img src="/1. Image/Json_format.png" title="사용자 입력 파일 형태"></img><br/>  
 - 사용자가 입력한 Json 파일을 통해 가명 처리 시스템 수행
 - {Key:Value = 가명 처리 수행할 컬럼명 : ["수행 기능", "옵션"]} 형식으로 입력
   
@@ -97,7 +97,7 @@
 <br/>
 
 ## 3.2 제안 시스템 전반적인 흐름도 
-<img src="Overview.png" title="프로그램 흐름도"></img><br/>
+<img src="/1. Image/Overview.png" title="프로그램 흐름도"></img><br/>
 
 - **Job1** : 가명화 연산 수행을 위해 통계 정보 획득 단계
   - Map, Combiner, Reduce 함수로 구성
@@ -157,7 +157,7 @@
 - 수치형 8개, 문자형 22개로 총 30개의 열로 구성된 정형 데이터
 - 500GB / 1000GB / 1500GB / 2000GB 대규모 데이터로 실험 진행
 - 2000GB 기준 약 60억 행으로 구성  
-<img src="Data.png" title="데이터 일부"></img><br/>
+<img src="/1. Image/Data.png" title="데이터 일부"></img><br/>
 
 <br/>
 <br/>
@@ -185,7 +185,7 @@
 <br/>
 
 ## 4.4 실험 결과
-<img src="Result.png" title="데이터 일부"></img><br/>
+<img src="/1. Image/Result.png" title="데이터 일부"></img><br/>
 
 - 본 연구는 정보화 시대의 데이터 활용성을 위한 **대용량 데이터에 대한 맵리듀스 기반 가명 처리 시스템**을 제안한다.
 - 총 8개의 대표적인 가명 처리 기능 동시 수행으로 실험
