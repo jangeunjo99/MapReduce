@@ -14,10 +14,11 @@
    3.1 사용자 입력 파일  
    3.2 제안 시스템 흐름도
 4. [제안 시스템 (Detail)](#4.-제안-시스템-(Detail))  
-   4.1 PreTrainMapper  
-   4.2 PreTrainReducer  
-   4.3 HadoopMainMapper    
-5. [실험](#5.-실험)  
+   4.1 PreTrainMapper   
+   4.2 PreTrainCombiner 
+   4.3 PreTrainReducer  
+   4.4 HadoopMainMapper    
+6. [실험](#5.-실험)  
    5.1 실험 환경  
    5.2 실험 데이터  
    5.3 파라미터 최적화  
@@ -152,11 +153,12 @@
 
 |변경 전. for-if 문|변경 후. 단일 for문 최적화|
 |:---:|:---:|
-|데이터셋의 모든 컬럼(N개)에 대해 for-if문을 사용하여 Aggregation, Random, TopBottom 기능이 필요한 컬럼을 확인하는 방식이었습니다. 이 과정에서 각 컬럼에 대해 기능의 필요성을 일일이 검사|Aggregation, Random, TopBottom 기능이 필요한 컬럼들의 위치를 사전에 식별해 저장. 이를 통해 해당 기능이 필요한 컬럼 위치만을 확인하는 단일 for문으로 처리 과정을 단순화시켜, 효율적으로 실행할 수 있게 개선|
+|- 데이터셋의 모든 컬럼(N개)에 대해 for-if문을 사용하여 Aggregation, Random, TopBottom 기능이 필요한 컬럼을 확인 <br/> - 이 과정에서 각 컬럼에 대해 기능의 필요성을 일일이 검사 <br/> - [**O(N*M)**]|- Aggregation, Random, TopBottom 기능이 필요한 컬럼들의 위치를 사전에 식별해 저장 <br/> - 이를 통해 해당 기능이 필요한 컬럼 위치만을 확인하는 단일 for문으로 처리 과정을 단순화시켜, 효율적으로 실행할 수 있게 개선 <br/> - [**O(M)**]|
+
 
 |변경 전. 데이터 타입 구분 없는 처리 방식 |변경 후. 예외 처리를 통한 최적화|
-|:---:|:---:|
-|데이터셋의 모든 컬럼(N개)에 대해 for-if문을 사용하여 Aggregation, Random, TopBottom 기능이 필요한 컬럼을 확인하는 방식이었습니다. 이 과정에서 각 컬럼에 대해 기능의 필요성을 일일이 검사|Aggregation, Random, TopBottom 기능이 필요한 컬럼들의 위치를 사전에 식별해 저장. 이를 통해 해당 기능이 필요한 컬럼 위치만을 확인하는 단일 for문으로 처리 과정을 단순화시켜, 효율적으로 실행할 수 있게 개선|
+|:-----:|:---:|
+|- Random 기능을 수행할 컬럼의 데이터 타입에 관계없이 모두 Reducer로 내보냄 <br/> |- 데이터 타입을 선별적으로 검사하여 숫자형 데이터만 Reducer로 전송하고, 문자형 데이터는 제외 <br/> - 문자형 데이터의 경우 Min, Max를 계산할 필요가 없음 <br/> - 문자형 데이터를 불필요하게 처리하는 과정을 배제함으로써, 시간 단축|
 
 ## 4.2 PretrainReducer  
 
