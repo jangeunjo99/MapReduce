@@ -14,9 +14,9 @@
    3.1 사용자 입력 파일  
    3.2 제안 시스템 흐름도
 4. [제안 시스템 (Detail)](#4.-제안-시스템-(Detail))  
-   4.1 PreTrainMapper   
-   4.2 PreTrainCombiner 
-   4.3 PreTrainReducer  
+   4.1 PreTrainMapper     
+   4.2 PreTrainCombiner   
+   4.3 PreTrainReducer    
    4.4 HadoopMainMapper    
 6. [실험](#5.-실험)  
    5.1 실험 환경  
@@ -158,11 +158,41 @@
 
 |변경 전. 데이터 타입 구분 없는 처리 방식 |변경 후. 예외 처리를 통한 최적화|
 |:-----:|:---:|
-|- Random 기능을 수행할 컬럼의 데이터 타입에 관계없이 모두 Reducer로 내보냄 <br/> |- 데이터 타입을 선별적으로 검사하여 숫자형 데이터만 Reducer로 전송하고, 문자형 데이터는 제외 <br/> - 문자형 데이터의 경우 Min, Max를 계산할 필요가 없음 <br/> - 문자형 데이터를 불필요하게 처리하는 과정을 배제함으로써, 시간 단축|
+|- Random 기능을 수행할 컬럼의 데이터 타입에 관계없이 모두 Reducer로 내보냄 <br/> |- 데이터 타입을 선별적으로 검사하여 숫자형 데이터만 Reducer로 전송하고, 문자형 데이터는 제외 <br/> - 문자형 데이터의 경우 Min, Max를 계산할 필요가 없음 <br/> - 문자형 데이터를 불필요하게 처리하는 과정을 배제함으로써, 시간 단축| 
 
-## 4.2 PretrainReducer  
+<br/>
+<br/>
 
-## 4.3 HadoopMainMapper  
+## 4.2 PreTrainCombiner  
+
+<br/>
+
+- **문제 상황**
+    - PretrainMapper에서 PretrainReducer로 전송되는 데이터의 크기가 커질수록, 리듀서의 처리 시간이 늘어나고 병목 현상 발생
+
+<br/>
+ 
+- **해결 방안**
+  - Map단계과 Reduce단계 사이에 Combiner를 추가하여 Map단계의 출력을 사전 처리하여 Reduce단계로 전송
+  - Combiner를 사용함으로써, 데이터 전송량과 처리 시간이 줄어들어 전체 MapReduce 작업의 성능 향상  
+
+<br/>
+
+- **동작 과정**
+
+|기능|동작 과정|
+|:---:|:---:|
+|Aggregation <br/> TopBottom|해당 컬럼 값의 합(sum), 값의 개수(count), 제곱합(sumOfSquares) 계산|  
+|Random|해당 컬럼 값의 최솟값(min), 최대값(max) 계산 |
+
+<br/>
+<br/>
+
+## 4.3 PretrainReducer   
+
+
+
+## 4.4 HadoopMainMapper  
 
 
 
